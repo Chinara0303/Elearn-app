@@ -25,7 +25,6 @@
         let deletedElem = $(this).parent().parent();
         let data = { id: imageId };
 
-        let changeElem = $(".courseImage-status"); //hamisini goturur
 
         $.ajax({
             url: "/Admin/Course/DeleteImage",
@@ -35,24 +34,17 @@
                 if (res.result) {
                     $(deletedElem).remove();
                     let imagesId = $(".images").children().eq(0).attr("data-id");
+                    let data = $(".images").children().eq(0);
+                    let changeElem = $(data).children().eq(1).children().eq(1); 
+
                     if (res.id == imagesId) {
-                        //if ($(changeElem).hasClass("de-active")) {
-                        //    console.log("var")
-                        //    $(changeElem).addClass("active-status");
-
-                        //    $(changeElem).removeClass("de-active");
-                        //}
+                        if ($(changeElem).children().hasClass("de-active")) {
+                            $(changeElem).children().eq(0).addClass("active-status");
+                            $(changeElem).children().eq(0).removeClass("de-active");
+                        }
                     }
-                
-
                 }
                 else {
-                    //debugger
-                    //if ($(changeElem).hasClass("active-status")) {
-
-                    //    $(changeElem).removeClass("active-status");
-                    //    $(changeElem).addClass("de-active");
-                    //}
                     alert("Product images must be min 1")
                 }
             }
